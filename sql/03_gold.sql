@@ -12,3 +12,10 @@ FROM SILVER.FACT_SALES f
 JOIN SILVER.CUSTOMER_DIM d
     ON f.customer_sk = d.customer_sk
 GROUP BY d.state;
+
+CREATE OR REPLACE TABLE GOLD.SALES_BY_YEAR AS
+SELECT
+    YEAR(transaction_date) AS sales_year,
+    SUM(sales_price) AS total_sales
+FROM SILVER.FACT_SALES 
+GROUP BY SALES_YEAR;
